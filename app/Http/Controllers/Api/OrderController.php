@@ -45,8 +45,7 @@ class OrderController extends Controller
     {
         // Validate the request.
         $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity' => 'required|integer|min:1',
+            'total_qty_ordered' => 'required|integer|min:1',
         ]);
 
         // Create a new order.
@@ -77,7 +76,6 @@ class OrderController extends Controller
                 'message' => 'Order not found.'
             ], 404);
         }
-
         // Check if the order belongs to the logged in user.
         if ($order->user_id != auth()->user()->id) {
             return response()->json([
